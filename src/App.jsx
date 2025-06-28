@@ -2,6 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams, useLocation } from "react-router-dom";
 
+const PRIORITY_OPTIONS = [
+  { value: 0, label: "Low", color: "bg-yellow-500 text-white" },
+  { value: 1, label: "Medium", color: "bg-orange-500 text-white" },
+  { value: 2, label: "High", color: "bg-red-500 text-white" },
+  { value: 3, label: "Unbreak Immediately", color: "bg-purple-600 text-white" },
+];
+
+function priorityInfo(value) {
+  return PRIORITY_OPTIONS.find((opt) => opt.value === parseInt(value)) || PRIORITY_OPTIONS[0];
+}
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -26,7 +37,14 @@ function TicketViewPage() {
         <p><strong>Subject:</strong> {ticket.subject}</p>
         <p><strong>Description:</strong> {ticket.description}</p>
         <p><strong>Status:</strong> {ticket.status}</p>
-        <p><strong>Priority:</strong> {ticket.priority}</p>
+        <p>
+          <strong>Priority:</strong>
+          <span
+            className={"ml-2 rounded px-2 py-1 " + priorityInfo(ticket.priority).color}
+          >
+            {priorityInfo(ticket.priority).label}
+          </span>
+        </p>
         <p><strong>Owner:</strong> {ticket.owner}</p>
         <p><strong>Issue Type:</strong> {ticket.issue_type}</p>
         <p><strong>Subcategory:</strong> {ticket.subcategory}</p>
@@ -118,13 +136,19 @@ function TicketList() {
                 </td>
                 <td className="p-2">
                   <select
-                    className="border rounded px-2 py-1"
+                    className={
+                      "border rounded px-2 py-1 " + priorityInfo(ticket.priority).color
+                    }
                     value={ticket.priority}
-                    onChange={(e) => handleInlineUpdate(ticket.id, "priority", parseInt(e.target.value))}
+                    onChange={(e) =>
+                      handleInlineUpdate(ticket.id, "priority", parseInt(e.target.value))
+                    }
                   >
-                    <option value={0}>Low</option>
-                    <option value={1}>Medium</option>
-                    <option value={2}>High</option>
+                    {PRIORITY_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
                   </select>
                 </td>
                 <td className="p-2">
@@ -198,10 +222,17 @@ function NewTicketPage() {
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input name="subject" value={formState.subject} onChange={handleChange} placeholder="Subject" className="input" />
           <input name="owner" value={formState.owner} onChange={handleChange} placeholder="Owner" className="input" />
-          <select name="priority" value={formState.priority} onChange={handleChange} className="input">
-            <option value={0}>Low</option>
-            <option value={1}>Medium</option>
-            <option value={2}>High</option>
+          <select
+            name="priority"
+            value={formState.priority}
+            onChange={handleChange}
+            className={"input " + priorityInfo(formState.priority).color}
+          >
+            {PRIORITY_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
           <select name="status" value={formState.status} onChange={handleChange} className="input">
             <option value="open">Open</option>
@@ -271,10 +302,17 @@ function EditTicketPage() {
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input name="subject" value={formState.subject} onChange={handleChange} placeholder="Subject" className="input" />
           <input name="owner" value={formState.owner} onChange={handleChange} placeholder="Owner" className="input" />
-          <select name="priority" value={formState.priority} onChange={handleChange} className="input">
-            <option value={0}>Low</option>
-            <option value={1}>Medium</option>
-            <option value={2}>High</option>
+          <select
+            name="priority"
+            value={formState.priority}
+            onChange={handleChange}
+            className={"input " + priorityInfo(formState.priority).color}
+          >
+            {PRIORITY_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
           <select name="status" value={formState.status} onChange={handleChange} className="input">
             <option value="open">Open</option>

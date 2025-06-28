@@ -7,6 +7,7 @@ This is a simple and responsive ticketing system built with React, Tailwind CSS,
 - Create, view, edit, and manage support tickets
 - Claim or unclaim tasks (toggles ownership)
 - Inline editing for priority, status, and owner fields
+- Color-coded priority levels (Low, Medium, High, and **Unbreak Immediately**)
 - Dashboard with clickable status filters (Open, Acknowledged, etc.)
 - Individual ticket view pages at `/ticket/:id`
 - Clean and modern UI with Tailwind CSS
