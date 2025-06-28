@@ -17,7 +17,7 @@ This is a simple and responsive ticketing system built with React, Tailwind CSS,
 - React Router DOM
 - Tailwind CSS
 - Axios (for backend integration)
-- Express or JSON server (expected backend at `http://localhost:5050/tickets`)
+- Flask API backend (runs at `http://localhost:5050`)
 
 ## Getting Started
 
@@ -37,7 +37,22 @@ This is a simple and responsive ticketing system built with React, Tailwind CSS,
   ```
   npm run dev
   ```
-(Optional) Start your API server at http://localhost:5050
 
+## Running the Flask API
 
+The backend uses Flask. Install the required Python packages:
+
+```bash
+pip install flask flask_cors flask_sqlalchemy
+```
+
+Start the API from the project root:
+
+```bash
+python backend/app.py
+```
+
+The API will be available at http://localhost:5050.
+
+Happy coding!
 
