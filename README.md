@@ -31,6 +31,7 @@ This is a simple and responsive ticketing system built with React, Tailwind CSS,
 
   ```
   npm install
+  pip install -r backend/requirements.txt
   ```
 3. Start the dev server:
 
