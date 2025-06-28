@@ -83,10 +83,19 @@ def create_ticket():
 def claim_ticket(ticket_id):
     data = request.get_json()
     ticket = Ticket.query.get_or_404(ticket_id)
-    ticket.owner = data.get('owner', 'Unassigned')
-    ticket.status = 'acknowledged'
+
+    owner = data.get('owner')
+    if owner:
+        ticket.owner = owner
+        ticket.status = 'acknowledged'
+        message = f"Ticket {ticket_id} claimed."
+    else:
+        ticket.owner = ''
+        ticket.status = 'open'
+        message = f"Ticket {ticket_id} unclaimed."
+
     db.session.commit()
-    return jsonify({"message": f"Ticket {ticket_id} claimed."})
+    return jsonify({"message": message})
 
 @app.route('/tickets/<int:ticket_id>', methods=['PUT'])
 def update_ticket(ticket_id):
