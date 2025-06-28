@@ -1,18 +1,6 @@
 # Flask Ticketing API
 
-This is a simple and responsive ticketing system built with React, Tailwind CSS, and React Router. It supports full CRUD functionality, task claiming, and status-based filtering with deep links.
-
-## Features
-
-- Create, view, edit, and manage support tickets
-- Claim or unclaim tasks (toggles ownership)
-- Inline editing for priority, status, and owner fields
-- Color-coded priority levels (Low, Medium, High, and **Unbreak Immediately**)
-- Dashboard with clickable status filters (Open, Acknowledged, etc.)
-- Individual ticket view pages at `/ticket/:id`
-- Clean and modern UI with Tailwind CSS
-=======
-This directory houses the Flask service that powers the ticketing system.
+This directory houses the Flask service that powers the ticketing system. It replaces the earlier Express/JSON server with a Python-based backend.
 
 ## Tech Stack
 
@@ -43,3 +31,4 @@ The first run creates a local `tickets.db` SQLite database.
 - `GET /tickets/owner/<owner>` — list tickets by owner
 
 All responses are in JSON format.
+
