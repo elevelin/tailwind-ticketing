@@ -1,4 +1,4 @@
-# Tailwind React Ticketing System
+# Flask Ticketing API
 
 This is a simple and responsive ticketing system built with React, Tailwind CSS, and React Router. It supports full CRUD functionality, task claiming, and status-based filtering with deep links.
 
@@ -11,50 +11,35 @@ This is a simple and responsive ticketing system built with React, Tailwind CSS,
 - Dashboard with clickable status filters (Open, Acknowledged, etc.)
 - Individual ticket view pages at `/ticket/:id`
 - Clean and modern UI with Tailwind CSS
+=======
+This directory houses the Flask service that powers the ticketing system.
 
 ## Tech Stack
 
-- React (with Vite)
-- React Router DOM
-- Tailwind CSS
-- Axios (for backend integration)
-- Flask API backend (runs at `http://localhost:5050`)
+- Python 3.10+
+- Flask with CORS support
+- Flask-SQLAlchemy (SQLite database)
 
 ## Getting Started
 
-1. Clone the repository:
-  ```
-  git clone https://github.com/your-username/tailwind-ticketing.git
-  cd tailwind-ticketing
-  ```
+1. Install Python dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Start the API from the project root:
+   ```bash
+   python backend/app.py
+   ```
+   By default the server runs on `http://localhost:5050`.
 
-2. Install dependencies:
+The first run creates a local `tickets.db` SQLite database.
 
-  ```
-  npm install
-  pip install -r backend/requirements.txt
-  ```
-3. Start the dev server:
+## Endpoints
 
-  ```
-  npm run dev
-  ```
+- `GET /tickets` — list all tickets
+- `POST /tickets` — create a ticket
+- `PUT /tickets/<id>` — update a ticket
+- `PUT /tickets/<id>/claim` — claim or unclaim a ticket
+- `GET /tickets/owner/<owner>` — list tickets by owner
 
-## Running the Flask API
-
-The backend uses Flask. Install the required Python packages:
-
-```bash
-pip install flask flask_cors flask_sqlalchemy
-```
-
-Start the API from the project root:
-
-```bash
-python backend/app.py
-```
-
-The API will be available at http://localhost:5050.
-
-Happy coding!
-
+All responses are in JSON format.
